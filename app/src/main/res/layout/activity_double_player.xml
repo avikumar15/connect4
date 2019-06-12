@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/layyy"
+    android:background="#b5651d"
+    android:orientation="vertical"
+    tools:context=".MainActivity"
+    >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="HIT THE COLUMN TO INSERT COIN"
+        android:textColor="#000"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:layout_marginBottom="40sp"
+        android:paddingTop="10sp"
+        android:textSize="20sp"
+        android:id="@+id/temppp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20sp"
+        android:text="winner"
+        android:gravity="center"
+        android:id="@+id/winnerrr"
+        android:textSize="40sp"
+        android:layout_centerHorizontal="true"
+        android:padding="10dp"
+
+        />
+
+</RelativeLayout>
