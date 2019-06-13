@@ -8,6 +8,7 @@
     android:id="@+id/layyy"
     android:background="#b5651d"
     android:orientation="vertical"
+    android:gravity="center_horizontal"
     tools:context=".MainActivity"
     >
 
@@ -34,7 +35,17 @@
         android:textSize="40sp"
         android:layout_centerHorizontal="true"
         android:padding="10dp"
+        />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/winnerrr"
+        android:layout_margin="10dp"
+        android:id="@+id/undooo"
+        android:onClick="UNDO"
+        android:text="UNDO"
+        android:textColor="#000"
         />
 
 </RelativeLayout>

@@ -35,8 +35,11 @@ public class DoublePlayer extends AppCompatActivity {
     Board board;
     TextView winnerrr,tend;
     Button b;
+    Button undo;
     int[][] score = {{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}};
     float x=7,y=6;
+    ballGenerate ball;
+    int t;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -52,6 +55,18 @@ public class DoublePlayer extends AppCompatActivity {
         Set();
     }
 
+    public void UNDO (View v)
+    {
+        undo = (Button) findViewById(R.id.undooo);
+        if(d[selection]>=1) {
+            RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.layyy);
+            d[selection]--;
+            score[t][selection + 3] = 0;
+            a--;
+            relativeLayout.removeView(ball);
+            undo.setVisibility(INVISIBLE);
+        }
+        }
 
     int l=6;
     float heightt,widthhh;
@@ -112,16 +127,20 @@ public class DoublePlayer extends AppCompatActivity {
         @Override
         public boolean onTouchEvent(MotionEvent event)
         {
-            if(event.getAction()==MotionEvent.ACTION_DOWN) {
+            undo.setVisibility(VISIBLE);
+            if(event.getAction()==MotionEvent.ACTION_DOWN && flag == 200) {
                 cx = event.getX();
                 cy = event.getY();
+
                 selection = (int) Math.floor((cx - (bitmap.getWidth() / 2f - 2 * getWidth() / 5f)) * x / widthhh);
+
+
                 if (selection < x && selection >= 0 && d[selection] < y) {
                     {
                         d[selection]++;
                         a++;
 
-                        int t = (int) y;
+                        t = (int) y;
                         t = t + 3 - d[selection];
                         if(a%2==0)
                             score[t][selection + 3] = 1;
@@ -150,11 +169,13 @@ public class DoublePlayer extends AppCompatActivity {
 
                             if (score[p][q] == 1) {
                                 winnerrr.setTextColor(Color.parseColor("#4BB543"));
-                                winnerrr.setText("PLAYER 2 WINS");
+                                winnerrr.setText("PLAYER 1 WINS");
+                                flag =100;
                                 winnerrr.setBackgroundColor(Color.parseColor("#98FB98"));
                             } else if (score[p][q] == 2) {
                                 winnerrr.setTextColor(Color.parseColor("#FF0000"));
-                                winnerrr.setText("PLAYER 1 WINS");
+                                winnerrr.setText("PLAYER 2 WINS");
+                                flag=100;
                                 winnerrr.setBackgroundColor(Color.parseColor("#DC143C"));
                             }
                             nanganach = 1;
@@ -163,11 +184,11 @@ public class DoublePlayer extends AppCompatActivity {
                             End();
                             winnerrr.setVisibility(VISIBLE);
                             nanganach = 1;
+                            flag=100;
                             winnerrr.setTextColor(Color.parseColor("#FF0000"));
                             winnerrr.setText("MATCH DRAWN.");
                             winnerrr.setBackgroundColor(Color.parseColor("#DC143C"));
                         }
-
                     }
                 }
             }
@@ -202,7 +223,7 @@ public class DoublePlayer extends AppCompatActivity {
 
     public void dropballs(float f)
     {
-        ballGenerate ball = new ballGenerate(this);
+        ball = new ballGenerate(this);
         RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.layyy);
         RelativeLayout.LayoutParams vp = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         ball.setLayoutParams(vp);
@@ -218,6 +239,9 @@ public class DoublePlayer extends AppCompatActivity {
         RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.layyy);
         board= new Board(this);
         tend = new TextView(this);
+        undo = new Button(this);
+
+        undo = (Button)findViewById(R.id.undooo);
         tend = (TextView)findViewById(R.id.temppp);
 
         RelativeLayout.LayoutParams ap = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,RelativeLayout.LayoutParams.MATCH_PARENT);
